@@ -173,6 +173,22 @@
         if (dx * dx + dy * dy < 120 * 120) moveAway();
       });
 
+      function isNearNo(clientX, clientY) {
+        var r = btn.getBoundingClientRect();
+        var margin = 30;
+        return clientX >= r.left - margin && clientX <= r.right + margin &&
+          clientY >= r.top - margin && clientY <= r.bottom + margin;
+      }
+      document.addEventListener('touchstart', function (e) {
+        if (!e.touches || e.touches.length === 0) return;
+        var x = e.touches[0].clientX;
+        var y = e.touches[0].clientY;
+        if (isNearNo(x, y)) {
+          moveAway();
+          e.preventDefault();
+        }
+      }, { passive: false });
+
       var slot = btn.closest('.btn-slot');
       var rect = slot.getBoundingClientRect();
       btn.style.left = (rect.left + (rect.width - btn.offsetWidth) / 2) + 'px';
