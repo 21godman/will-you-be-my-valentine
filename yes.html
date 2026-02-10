@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I knew you'd say yes</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #ffb7c5 0%, #ffc0cb 25%, #ffd1dc 50%, #ffe4ec 100%);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+    .bubble {
+      position: fixed;
+      border-radius: 50%;
+      background: rgba(255, 182, 193, 0.4);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .bubble:nth-child(1) { width: 90px; height: 90px; left: 8%; top: 10%; animation: float 9s ease-in-out infinite; }
+    .bubble:nth-child(2) { width: 55px; height: 55px; left: 70%; top: 25%; animation: float 7s ease-in-out infinite 0.8s; }
+    .bubble:nth-child(3) { width: 110px; height: 110px; right: 10%; bottom: 20%; animation: float 11s ease-in-out infinite 1.5s; }
+    .bubble:nth-child(4) { width: 45px; height: 45px; left: 15%; bottom: 35%; animation: float 6s ease-in-out infinite 0.3s; }
+    .bubble:nth-child(5) { width: 65px; height: 65px; left: 55%; top: 8%; animation: float 8s ease-in-out infinite 2s; }
+    .bubble:nth-child(6) { width: 50px; height: 50px; right: 30%; top: 45%; animation: float 5.5s ease-in-out infinite 1s; }
+    .bubble:nth-child(7) { width: 75px; height: 75px; left: 3%; top: 55%; animation: float 8.5s ease-in-out infinite 0.5s; }
+    .bubble:nth-child(8) { width: 40px; height: 40px; right: 8%; top: 70%; animation: float 6.5s ease-in-out infinite 2.2s; }
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(12px, -18px) scale(1.05); }
+      50% { transform: translate(-8px, 12px) scale(0.96); }
+      75% { transform: translate(18px, 10px) scale(1.03); }
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 2rem;
+    }
+    h1 {
+      color: #8b2942;
+      font-size: clamp(1.5rem, 4.5vw, 2.25rem);
+      font-weight: 600;
+      margin: 0;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+      animation: fadeIn 0.6s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <div class="content">
+    <h1>I knew you'd say yes</h1>
+  </div>
+</body>
+</html>
