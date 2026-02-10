@@ -17,7 +17,8 @@
       justify-content: center;
       background: linear-gradient(135deg, #ffb7c5 0%, #ffc0cb 25%, #ffd1dc 50%, #ffe4ec 100%);
       font-family: "Segoe UI", system-ui, sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
+      overflow-y: auto;
       position: relative;
     }
     .bubble {
@@ -41,19 +42,83 @@
       50% { transform: translate(-8px, 12px) scale(0.96); }
       75% { transform: translate(18px, 10px) scale(1.03); }
     }
+    .confetti {
+      position: fixed;
+      pointer-events: none;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .confetti span {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      animation: fall linear forwards;
+    }
+    .confetti span:nth-child(odd) { background: #e91e63; }
+    .confetti span:nth-child(3n) { background: #f8bbd9; }
+    .confetti span:nth-child(5n) { background: #c2185b; }
+    .confetti span:nth-child(4n) { font-size: 18px; width: auto; height: auto; }
+    @keyframes fall {
+      to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+    .hearts {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .hearts span {
+      position: absolute;
+      animation: heartFloat 4s ease-in-out infinite;
+    }
+    @keyframes heartFloat {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.7; }
+      50% { transform: translateY(-20px) scale(1.1); opacity: 1; }
+    }
     .content {
       position: relative;
-      z-index: 1;
+      z-index: 3;
       text-align: center;
       padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .celebration-emoji {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      animation: bounce 0.6s ease-out;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
     }
     h1 {
       color: #8b2942;
       font-size: clamp(1.5rem, 4.5vw, 2.25rem);
       font-weight: 600;
-      margin: 0;
+      margin: 0 0 1.5rem;
       text-shadow: 0 1px 2px rgba(255,255,255,0.5);
       animation: fadeIn 0.6s ease-out;
+    }
+    .page-img {
+      width: 100%;
+      max-width: min(92vw, 22em);
+      height: auto;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 1.25rem;
+      box-shadow: 0 8px 24px rgba(139, 41, 66, 0.25);
+      animation: fadeIn 0.8s ease-out 0.2s both;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -71,8 +136,45 @@
   <div class="bubble"></div>
   <div class="bubble"></div>
 
+  <div class="confetti" id="confetti"></div>
+  <div class="hearts" id="hearts"></div>
+
   <div class="content">
+    <img class="page-img" src="Gemini_Generated_Image_2.png" alt="Couple holding hands" />
+    <p class="celebration-emoji" aria-hidden="true">🎉 💕</p>
     <h1>I knew you'd say yes</h1>
   </div>
+
+  <script>
+    (function () {
+      var colors = ['#e91e63', '#f8bbd9', '#c2185b', '#ffcdd2'];
+      var confettiEl = document.getElementById('confetti');
+      for (var i = 0; i < 50; i++) {
+        var s = document.createElement('span');
+        s.style.left = Math.random() * 100 + '%';
+        s.style.top = '-20px';
+        s.style.animationDuration = (3 + Math.random() * 4) + 's';
+        s.style.animationDelay = Math.random() * 2 + 's';
+        s.style.background = colors[Math.floor(Math.random() * colors.length)];
+        if (i % 5 === 0) {
+          s.innerHTML = '❤';
+          s.style.background = 'none';
+          s.style.fontSize = (14 + Math.random() * 12) + 'px';
+        }
+        confettiEl.appendChild(s);
+      }
+      var heartsEl = document.getElementById('hearts');
+      for (var j = 0; j < 12; j++) {
+        var h = document.createElement('span');
+        h.textContent = '❤';
+        h.style.left = Math.random() * 100 + '%';
+        h.style.top = Math.random() * 100 + '%';
+        h.style.fontSize = (20 + Math.random() * 24) + 'px';
+        h.style.animationDelay = Math.random() * 2 + 's';
+        h.style.color = 'rgba(233, 30, 99, 0.6)';
+        heartsEl.appendChild(h);
+      }
+    })();
+  </script>
 </body>
 </html>
